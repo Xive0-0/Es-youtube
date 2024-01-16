@@ -1,9 +1,19 @@
-import { useState } from "react";
+
 import "./App.css";
 import Card from "./componeti/Card";
 
 function App() {
-  const [count, setCount] = useState(0);
+  function click() {
+    alert("ciao");
+  }
+  function clickfin(e: object) {
+    console.log(e);
+  }
+  function clickSubmit(e) {
+    e.preventDefault()
+      console.log(e)
+    
+  }
   const citta = [
     {
       id: 0,
@@ -47,7 +57,7 @@ function App() {
     <>
       <div className="grid grid-cols-4 gap-5">
         {citta
-          .filter((city) => city.isvisited == true)
+          .filter((city) => city.isvisited == true || city.isvisited == false)
           .map((city) => (
             <Card
               key={city.id}
@@ -62,9 +72,11 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+        <button onClick={click}>alert</button>
+        <input onChange={clickfin} />
+        <form action="" onSubmit={clickfin}>
+          <button type="submit" onClick={clickSubmit}>invia</button>
+        </form>
       </div>
     </>
   );
