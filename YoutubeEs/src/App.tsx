@@ -46,15 +46,17 @@ function App() {
   return (
     <>
       <div className="grid grid-cols-4 gap-5">
-        {citta.map((city) => (
-          <Card
-            key={city.id}
-            titolo={city.titolo}
-            isvisited={city.isvisited}
-            imgUrl={city.imgUrl}
-            descrizione={city.descrizione}
-          ></Card>
-        ))}
+        {citta
+          .filter((city) => city.isvisited == true)
+          .map((city) => (
+            <Card
+              key={city.id}
+              titolo={city.titolo}
+              isvisited={city.isvisited}
+              imgUrl={city.imgUrl}
+              descrizione={city.descrizione}
+            ></Card>
+          ))}
       </div>
       <div>
         <p>
