@@ -9,7 +9,7 @@ function App() {
   function clickfin(e: object) {
     console.log(e);
   }
-  function clickSubmit(e) {
+  function clickSubmit(e:any) {
     e.preventDefault()
       console.log(e)
     

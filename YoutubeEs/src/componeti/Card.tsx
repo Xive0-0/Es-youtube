@@ -1,4 +1,4 @@
-interface CardProps {
+type CardProps ={
   imgUrl: string;
   titolo: string;
   descrizione: string;
