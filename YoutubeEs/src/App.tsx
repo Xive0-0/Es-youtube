@@ -1,19 +1,18 @@
 
 import "./App.css";
 import Card from "./componeti/Card";
+import {useState} from "react";
 
-function App() {
+function App() { 
   function click() {
     alert("ciao");
   }
   function clickfin(e: object) {
     console.log(e);
   }
-  function clickSubmit(e:any) {
-    e.preventDefault()
-      console.log(e)
-    
-  }
+ 
+  
+  console.log(useState(0))
   const citta = [
     {
       id: 0,
@@ -75,7 +74,8 @@ function App() {
         <button onClick={click}>alert</button>
         <input onChange={clickfin} />
         <form action="" onSubmit={clickfin}>
-          <button type="submit" onClick={clickSubmit}>invia</button>
+          <button type="submit" >invia:{}</button>
+          
         </form>
       </div>
     </>
