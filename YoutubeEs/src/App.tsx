@@ -1,19 +1,21 @@
-
 import "./App.css";
 import Card from "./componeti/Card";
-import {useState} from "react";
+import { useState } from "react";
+import CardForm from "./componeti/CardForm";
 
-function App() { 
-  function click() {
+function App() {
+  const click = () => {
     alert("ciao");
-  }
-  function clickfin(e: object) {
+  };
+  const clickfin = (e: object) => {
     console.log(e);
-  }
- 
-  
-  console.log(useState(0))
-  const citta = [
+  };
+  const submit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+  };
+  const [count, setcount] = useState<number>(0);
+
+  const [citta, setcitta] = useState([
     {
       id: 0,
       imgUrl:
@@ -50,10 +52,20 @@ function App() {
       titolo: "tramonto",
       isvisited: false,
     },
-  ];
-
+  ]);
+  type CardProps = {
+    id: number;
+    imgUrl: string;
+    titolo: string;
+    descrizione: string;
+    isvisited: boolean;
+  };
+  const aggiungicitta = (city: CardProps) => {
+    setcitta([...citta, city]);
+  };
   return (
     <>
+      <CardForm addcity={aggiungicitta}></CardForm>
       <div className="grid grid-cols-4 gap-5">
         {citta
           .filter((city) => city.isvisited == true || city.isvisited == false)
@@ -73,9 +85,15 @@ function App() {
         </p>
         <button onClick={click}>alert</button>
         <input onChange={clickfin} />
-        <form action="" onSubmit={clickfin}>
-          <button type="submit" >invia:{}</button>
-          
+        <form action="" onSubmit={submit}>
+          <button
+            type="submit"
+            onClick={() => {
+              setcount(() => count + 1);
+            }}
+          >
+            invia:{count}
+          </button>
         </form>
       </div>
     </>
