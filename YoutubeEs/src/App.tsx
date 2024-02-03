@@ -2,6 +2,7 @@ import "./App.css";
 import Card from "./componeti/Card";
 import { useState } from "react";
 import CardForm from "./componeti/CardForm";
+import Example from "./componeti/Example";
 
 function App() {
   const click = () => {
@@ -65,6 +66,7 @@ function App() {
   };
   return (
     <>
+    <Example></Example>
       <CardForm addcity={aggiungicitta}></CardForm>
       <div className="grid grid-cols-4 gap-5">
         {citta
