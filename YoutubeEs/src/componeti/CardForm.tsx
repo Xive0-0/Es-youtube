@@ -34,7 +34,7 @@ const CardForm: React.FC<{ addCity:AddCity}> = ({ addCity }) => {
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type, checked} = e.target;
     const inputValue = type === "checkbox" ? checked : value;
     console.log(`Campo ${name} cambiato a:`, inputValue);
     setFormData({ ...formData, [name]: inputValue });

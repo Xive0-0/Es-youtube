@@ -1,6 +1,6 @@
 import "./App.css";
 import Card from "./componeti/Card";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CardForm from "./componeti/CardForm";
 import Example from "./componeti/Example";
 
@@ -15,6 +15,18 @@ function App() {
     e.preventDefault();
   };
   const [count, setcount] = useState<number>(0);
+  const [date, setData] = useState([]);
+  useEffect(() => {
+    document.title = `conteggio:${count}`;
+    console.log("ciao bro");
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then((Response) => Response.json())
+      .then((json) => {
+        console.log(json);
+        return json;
+      })
+      .then((data) => setData(data));
+  }, []);
 
   const [citta, setcitta] = useState([
     {
@@ -55,12 +67,12 @@ function App() {
     },
   ]);
 
-  const aggiungicitta= (city:any) => {
+  const aggiungicitta = (city: any) => {
     setcitta([...citta, city]);
   };
   return (
     <>
-    <Example></Example>
+      <Example></Example>
       <CardForm addCity={aggiungicitta}></CardForm>
       <div className="grid grid-cols-4 gap-5">
         {citta
@@ -74,24 +86,17 @@ function App() {
               descrizione={city.descrizione}
             ></Card>
           ))}
-      </div>
-      <div>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-        <button onClick={click}>alert</button>
-        <input onChange={clickfin} />
-        <form action="" onSubmit={submit}>
-          <button
-            type="submit"
-            onClick={() => {
-              setcount(() => count + 1);
-            }}
-          >
-            invia:{count}
-          </button>
-        </form>
-      </div>
+      
+        </div>
+        <div className="grid grid-cols-4 gap-5">
+          {date.map((item) => (
+            <div key={item.id} className="bg-slate-400 rounded-lg p-3">
+              <p>userid: {item.userId}</p>
+              <p>body{item.body}</p>
+              <p>title{item.body}</p>
+            </div>
+          ))}
+          </div>
     </>
   );
 }
