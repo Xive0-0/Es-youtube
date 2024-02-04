@@ -1,6 +1,16 @@
 import { useState, ChangeEvent, FormEvent } from "react";
+import { v4 as uuidv4 } from 'uuid';
+type City = {
+  id: string;
+  imgUrl: string;
+  descrizione: string;
+  titolo: string;
+  isVisited: boolean;
+};
 
-const CardForm: React.FC<{ addCity: any }> = ({ addCity }) => {
+type AddCity = (city: City) => void
+
+const CardForm: React.FC<{ addCity:AddCity}> = ({ addCity }) => {
   const [formData, setFormData] = useState({
     id: "",
     imgUrl: "",
@@ -12,18 +22,21 @@ const CardForm: React.FC<{ addCity: any }> = ({ addCity }) => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const city = {
-      id: Math.random(),
+      id: uuidv4(),
       imgUrl: formData.imgUrl,
       descrizione: formData.descrizione,
       titolo: formData.titolo,
       isVisited: formData.isVisited,
     };
+    console.log("Nuova città:", city);
     addCity(city);
   };
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value, type, checked} = e.target;
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value, type, checked } = e.target;
     const inputValue = type === "checkbox" ? checked : value;
+    console.log(`Campo ${name} cambiato a:`, inputValue);
     setFormData({ ...formData, [name]: inputValue });
   };
 

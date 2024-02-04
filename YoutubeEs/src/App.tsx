@@ -54,20 +54,14 @@ function App() {
       isvisited: false,
     },
   ]);
-  type CardProps = {
-    id: number;
-    imgUrl: string;
-    titolo: string;
-    descrizione: string;
-    isvisited: boolean;
-  };
-  const aggiungicitta = (city: CardProps) => {
+
+  const aggiungicitta= (city:any) => {
     setcitta([...citta, city]);
   };
   return (
     <>
     <Example></Example>
-      <CardForm addcity={aggiungicitta}></CardForm>
+      <CardForm addCity={aggiungicitta}></CardForm>
       <div className="grid grid-cols-4 gap-5">
         {citta
           .filter((city) => city.isvisited == true || city.isvisited == false)
